@@ -3,8 +3,14 @@
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
+  "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "lint": "tslint --project tsconfig.json",
+    "build": "rimraf dist && npx tsc",
+    "prestart": "npm run build",
+    "start": "npm run build && node dist/index.js",
+    "predev": "npm run build",
+    "dev": "concurrently \"npx tsc -w\"  \"nodemon dist/index.js\""
   },
   "repository": {
     "type": "git",
@@ -15,5 +21,19 @@
   "bugs": {
     "url": "https://github.com/imick-io/node-ts/issues"
   },
-  "homepage": "https://github.com/imick-io/node-ts#readme"
+  "homepage": "https://github.com/imick-io/node-ts#readme",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "express": "^4.19.1",
+    "rimraf": "^5.0.5",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/express": "^4.17.21",
+    "@types/node": "^20.11.30",
+    "concurrently": "^8.2.2",
+    "nodemon": "^3.1.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.3"
+  }
 }
